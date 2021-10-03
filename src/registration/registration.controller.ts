@@ -11,6 +11,7 @@ import {
 import { LoginGuard } from '../auth/login.guard';
 import { Authenticated } from '../auth/authenticated.guard';
 import { UsersService } from 'src/users/users.service';
+import { FormDataRequest } from 'nestjs-form-data';
 
 @Controller('registration')
 export class RegistrationController {
@@ -38,7 +39,9 @@ export class RegistrationController {
   SignIn(): void {}
 
   @Post('/register')
+  @FormDataRequest()
   register(@Body() data: { username: String; password: String }) {
+    console.log(data);
     this.userService.register(data.username, data.password);
   }
 }

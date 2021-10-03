@@ -24,6 +24,10 @@ export default class SignIn extends React.Component{
                 </form>
 
                 <form action="http://localhost:3000/registration/register" method="POST">
+
+                    <label value="FOR REGISTER" />
+                    <input type="text" name="username" />
+                    <input type="text" name="password" />
                     <input type="submit" value="register"/>
                 </form>
 

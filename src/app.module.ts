@@ -7,6 +7,8 @@ import { RegistrationModule } from './registration/registration.module';
 import { UsersModule } from './users/users.module';
 import Next from 'next';
 import { RegistrationController } from './registration/registration.controller';
+import { join } from 'path';
+import { NestjsFormDataModule } from 'nestjs-form-data';
 
 @Module({
   imports: [
@@ -14,7 +16,7 @@ import { RegistrationController } from './registration/registration.controller';
     AuthModule,
     RegistrationModule,
     UsersModule,
-
+    NestjsFormDataModule,
     RenderModule.forRootAsync(
       Next({ dev: process.env.NODE_ENV !== 'production' }),
     ),
@@ -26,14 +28,15 @@ import { RegistrationController } from './registration/registration.controller';
       username: 'root',
       password: 'password',
       database: 'Project',
-      synchronize: true,
-      entities: ['src/database/entity/**/*.ts'],
-      migrations: ['src/database/migration/**/*.ts'],
-      subscribers: ['src/database/subscriber/**/*.ts'],
+      synchronize: false,
+      migrationsRun: false,
+      entities: [join('./dist/database/entity', '**', '*.entity.{ts,js}')],
+      migrations: ['dist/database/migration/**/*.ts'],
+      subscribers: ['dist/database/subscriber/**/*.ts'],
       cli: {
-        entitiesDir: 'src/database/entity',
-        migrationsDir: 'src/database/migration',
-        subscribersDir: 'src/database/subscriber',
+        entitiesDir: 'dist/database/entity',
+        migrationsDir: 'dist/database/migration',
+        subscribersDir: 'dist/database/subscriber',
       },
     }),
   ],

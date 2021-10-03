@@ -1,9 +1,11 @@
 import { Injectable } from '@nestjs/common';
 import UserRepository from 'src/database/repository/UserRepository';
+import { getCustomRepository } from 'typeorm';
 
 @Injectable()
 export class UsersService {
   constructor(private userRep: UserRepository) {}
+
   private readonly users = [
     {
       userId: 1,
@@ -17,7 +19,8 @@ export class UsersService {
   }
 
   async register(username: String, password: String) {
-    this.userRep.add(username, password);
+    const rep = getCustomRepository(UserRepository);
+    rep.add(username, password);
   }
 }
 
