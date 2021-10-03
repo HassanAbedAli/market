@@ -44,4 +44,12 @@ export class RegistrationController {
     console.log(data);
     this.userService.register(data.username, data.password);
   }
+
+  @Get('/product')
+  @Render('Product')
+  props() {
+    return {
+      title: 'Product Test title',
+    };
+  }
 }
