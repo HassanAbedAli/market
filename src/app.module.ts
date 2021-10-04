@@ -8,9 +8,11 @@ import { UsersModule } from './users/users.module';
 import Next from 'next';
 import { RegistrationController } from './registration/registration.controller';
 import { NestjsFormDataModule } from 'nestjs-form-data';
+import { ShopModule } from './shop/shop.module';
 
 @Module({
   imports: [
+    ShopModule,
     RepositoryModule,
     AuthModule,
     RegistrationModule,
@@ -19,7 +21,6 @@ import { NestjsFormDataModule } from 'nestjs-form-data';
     RenderModule.forRootAsync(
       Next({ dev: process.env.NODE_ENV !== 'production' }),
     ),
-
     TypeOrmModule.forRoot(),
   ],
   controllers: [RegistrationController],

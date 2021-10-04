@@ -5,7 +5,7 @@ const ormconfig = {
   username: 'root',
   password: 'password',
   database: 'capstone',
-  synchronize: true,
+  synchronize: false,
   entities: ['./dist/database' + '/entity/**/*.entity.ts', './dist/database' + '/entity/**/*.entity.js'],
   migrations: ['./dist/database' + '/migration/**/*.ts', './dist/database' + '/migration/**/*.js'],
   cli: {
