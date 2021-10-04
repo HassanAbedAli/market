@@ -34,9 +34,8 @@
   "include": [
     "next-env.d.ts",
     "**/*.ts",
-    "**/*.tsx"
-, "pages/views/Product.js"  ],
-  "exclude": [
+    "**/*.tsx"],
+  "exclude": [ "ormconfig.js",
     "node_modules"
   ]
 }
