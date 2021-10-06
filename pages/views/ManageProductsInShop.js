@@ -2,12 +2,12 @@ import React from 'react'
 import Head from 'next/head'
 
 
-export default class ManageShopsInProfile extends React.Component{
+export default class ManageProductsInProfile extends React.Component{
 
   constructor(props){
       super(props);
       this.state = {
-          toDeleteShop:0
+          toDeleteProduct:0
       };
   }
 

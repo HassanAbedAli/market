@@ -17,7 +17,7 @@ export class ShopController {
 
   @Get('/shops/:id')
   getShopById(@Param('id') shopId: number) {
-    this.service.getShopById(shopId);
+    return this.service.getShopById(shopId);
   }
 
   @Post('/shops')
@@ -25,7 +25,7 @@ export class ShopController {
     this.service.createShop(data);
   }
 
-  @Delete('shops/:id')
+  @Post('shops/delete/:id')
   deleteShop(@Param('id') shopId: number) {
     this.service.deleteShop(shopId);
   }
