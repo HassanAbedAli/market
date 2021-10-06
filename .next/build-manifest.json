@@ -33,11 +33,6 @@
       "static/chunks/webpack.js",
       "static/chunks/main.js",
       "static/chunks/pages/views/Profile.js"
-    ],
-    "/views/SignIn": [
-      "static/chunks/webpack.js",
-      "static/chunks/main.js",
-      "static/chunks/pages/views/SignIn.js"
     ]
   },
   "ampFirstPages": []

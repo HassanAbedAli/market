@@ -20,16 +20,20 @@ export class RegistrationController {
   @Post('/login')
   @UseGuards(LoginGuard)
   @Redirect('http://localhost:3000/profile')
-  Login(): void {
+  async Login(): Promise<any> {
     console.log('someone logged in');
   }
 
   @Get('/profile')
   @UseGuards(Authenticated)
   @Render('Profile')
-  profile(@Request() req): void {
-    console.log(req.user);
-    return req.user;
+  async profile(@Request() req): Promise<any> {
+    const userAndShops = await repositoriesStore
+      .getUserRepository()
+      .findOne(req.user.id, { relations: ['shops'] });
+
+    console.log(userAndShops);
+    return userAndShops;
   }
 
   @Post('/logout')
