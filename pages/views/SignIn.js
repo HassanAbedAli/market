@@ -12,25 +12,16 @@ export default class SignIn extends React.Component{
     render(){
         return(
             <>
-                <form action="http://localhost:3000/registration/login" method="POST">
-                    <input type="text" name="username" />
+                <form action="http://localhost:3000/login" method="POST">
+                    <input type="text" name="email" />
                     <input type="text" name="password" />
                     <input type="submit" value="Sign In"/>
                 </form>
 
                 <>
-                <form action="http://localhost:3000/registration/logout" method="POST">
+                <form action="http://localhost:3000/logout" method="POST">
                     <input type="submit" value="logout"/>
                 </form>
-
-                <form action="http://localhost:3000/registration/register" method="POST">
-
-                    <label value="FOR REGISTER" />
-                    <input type="text" name="username" />
-                    <input type="text" name="password" />
-                    <input type="submit" value="register"/>
-                </form>
-
                 </>
             </>
         )

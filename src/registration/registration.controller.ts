@@ -12,13 +12,14 @@ import { LoginGuard } from '../auth/login.guard';
 import { Authenticated } from '../auth/authenticated.guard';
 import { UsersService } from 'src/users/users.service';
 import { FormDataRequest } from 'nestjs-form-data';
+import repositoriesStore from 'src/database/repository/repositories';
 
-@Controller('registration')
+@Controller()
 export class RegistrationController {
   constructor(private userService: UsersService) {}
   @Post('/login')
   @UseGuards(LoginGuard)
-  @Redirect('http://localhost:3000/registration/profile')
+  @Redirect('http://localhost:3000/profile')
   Login(): void {
     console.log('someone logged in');
   }
@@ -26,7 +27,10 @@ export class RegistrationController {
   @Get('/profile')
   @UseGuards(Authenticated)
   @Render('Profile')
-  profile(): void {}
+  profile(@Request() req): void {
+    console.log(req.user);
+    return req.user;
+  }
 
   @Post('/logout')
   logout(@Request() req): any {
@@ -34,22 +38,34 @@ export class RegistrationController {
     console.log('someone logged out');
   }
 
+  @Post('/user')
+  async test(@Body() data) {
+    console.log(data);
+    const user = await repositoriesStore
+      .getUserRepository()
+      .findOne({ where: { email: data.email, password: data.password } });
+
+    console.log(user);
+
+    if (user) console.log('not null');
+  }
+
   @Get('/signIn')
   @Render('SignIn')
   SignIn(): void {}
 
   @Post('/register')
+  //@Redirect
   @FormDataRequest()
-  register(@Body() data: { username: String; password: String }) {
+  register(
+    @Body()
+    data: any,
+  ) {
     console.log(data);
-    this.userService.register(data.username, data.password);
+    this.userService.addUser(data);
   }
 
-  @Get('/product')
-  @Render('Product')
-  props() {
-    return {
-      title: 'Product Test title',
-    };
-  }
+  @Get('/register')
+  @Render('Register')
+  getRegisterPage() {}
 }

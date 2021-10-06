@@ -6,11 +6,11 @@ const ormconfig = {
   password: 'password',
   database: 'capstone',
   synchronize: false,
-  entities: ['./dist/database' + '/entity/**/*.entity.ts', './dist/database' + '/entity/**/*.entity.js'],
-  migrations: ['./dist/database' + '/migration/**/*.ts', './dist/database' + '/migration/**/*.js'],
+  entities: ['./dist/database' + '/entity/**/*.entity.js', './dist/database' + '/entity/**/*.entity.ts'],
+  migrations: ['./dist/database' + '/migrations/**/*.js', './dist/database' + '/migrations/**/*.ts'],
   cli: {
     entitiesDir: './dist/database/entity/*.{js,ts}',
-    migrationsDir: './dist/database/migration/*.{js,ts}',
+    migrationsDir: './dist/database/migrations/*.{js,ts}',
   },
 };
 module.exports = ormconfig;

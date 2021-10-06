@@ -1,31 +1,37 @@
 import { Injectable } from '@nestjs/common';
-import UserRepository from 'src/database/repository/UserRepository';
-import { getCustomRepository } from 'typeorm';
+import repositoriesStore from 'src/database/repository/repositories';
+import User from 'src/database/entity/User.entity';
 
 @Injectable()
 export class UsersService {
-  constructor(private userRep: UserRepository) {}
+  constructor() {}
 
-  private readonly users = [
-    {
-      userId: 1,
-      username: 'Hassan',
-      password: '12345',
-    },
-  ];
+  //async findOne(email: String, password: String): Promise<User> {
+  // const user = await repositoriesStore
+  //    .getUserRepository()
+  //    .findOne({ email: email, password: password });
+  //  console.log(user);
+  // return user;
+  // }
 
-  async findOne(username: String): Promise<User> {
-    return this.users.find((user) => user.username == username);
+  async addUser(data: {
+    firstname: String;
+    lastname: String;
+    email: String;
+    username: String;
+    phone: number;
+    password: String;
+  }) {
+    const user = new User();
+    user.firstName = data.firstname;
+    user.lastName = data.lastname;
+    user.email = data.email;
+    user.phoneNumber = data.phone;
+    user.username = data.username;
+    user.password = data.password;
+
+    repositoriesStore.getUserRepository().save(user);
   }
 
-  async register(username: String, password: String) {
-    const rep = getCustomRepository(UserRepository);
-    rep.add(username, password);
-  }
-}
-
-interface User {
-  userId: number;
-  username: String;
-  password: String;
+  async deleteUser() {}
 }

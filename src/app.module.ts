@@ -1,3 +1,6 @@
+import { DatabaseModule } from './database/database.module';
+import { ProductsController } from './product/products.controller';
+import { ProductModule } from './product/product.module';
 import { RepositoryModule } from './database/repository/repository.module';
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
@@ -12,6 +15,8 @@ import { ShopModule } from './shop/shop.module';
 
 @Module({
   imports: [
+    DatabaseModule,
+    ProductModule,
     ShopModule,
     RepositoryModule,
     AuthModule,
@@ -23,6 +28,6 @@ import { ShopModule } from './shop/shop.module';
     ),
     TypeOrmModule.forRoot(),
   ],
-  controllers: [RegistrationController],
+  controllers: [ProductsController, RegistrationController],
 })
 export class AppModule {}

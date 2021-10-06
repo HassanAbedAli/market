@@ -23,6 +23,9 @@ export default class User {
   @Column()
   lastName: String;
 
+  @Column()
+  phoneNumber: number;
+
   @OneToMany(() => Shop, (shop) => shop.user)
   shops: Shop[];
 
