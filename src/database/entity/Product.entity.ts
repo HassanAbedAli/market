@@ -1,3 +1,4 @@
+import { IsDate, Max, Min } from 'class-validator';
 import {
   Column,
   Entity,
@@ -7,7 +8,6 @@ import {
   PrimaryGeneratedColumn,
 } from 'typeorm';
 
-import { Discount } from './Discount.entity';
 import { Shop } from './Shop.entity';
 
 @Entity('Product')
@@ -26,10 +26,22 @@ export class Product {
   @Column()
   category: String;
 
-  @OneToOne(() => Discount)
-  @JoinColumn()
-  discount: Discount;
-
   @ManyToOne(() => Shop, (shop) => shop.products)
   shop: Shop;
+
+  @Column()
+  price: number;
+
+  @Column()
+  @Min(0)
+  @Max(100)
+  percentage: number;
+
+  @Column()
+  @IsDate()
+  dateStart: Date;
+
+  @Column()
+  @IsDate()
+  dateEnd: Date;
 }

@@ -29,7 +29,9 @@ export class ShopService {
   }
 
   async getShopById(shopId: number): Promise<Shop> {
-    return repositoriesStore.getShopRepository().findOne({ id: shopId });
+    return repositoriesStore
+      .getShopRepository()
+      .findOne(shopId, { relations: ['products', 'auctions'] });
   }
 
   async getAllShops(): Promise<Shop[]> {

@@ -1,6 +1,5 @@
 import { DatabaseModule } from './database/database.module';
 import { ProductsController } from './product/products.controller';
-import { ProductModule } from './product/product.module';
 import { RepositoryModule } from './database/repository/repository.module';
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
@@ -12,15 +11,16 @@ import Next from 'next';
 import { RegistrationController } from './registration/registration.controller';
 import { NestjsFormDataModule } from 'nestjs-form-data';
 import { ShopModule } from './shop/shop.module';
+import { ProductModule } from './product/product.module';
 
 @Module({
   imports: [
     DatabaseModule,
-    ProductModule,
     ShopModule,
     RepositoryModule,
     AuthModule,
     RegistrationModule,
+    ProductModule,
     UsersModule,
     NestjsFormDataModule,
     RenderModule.forRootAsync(

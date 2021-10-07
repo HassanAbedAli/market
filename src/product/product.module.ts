@@ -1,12 +1,14 @@
-/*
-https://docs.nestjs.com/modules
-*/
-
+import { ProductService } from './product.service';
 import { Module } from '@nestjs/common';
+import { ProductsController } from './products.controller';
+import repositoriesStore from 'src/database/repository/repositories';
 
 @Module({
-    imports: [],
-    controllers: [],
-    providers: [],
+  imports: [repositoriesStore],
+  controllers: [ProductsController],
+  providers: [ProductService],
+  exports: [ProductService],
 })
-export class ProductModule {}
+export class ProductModule {
+  constructor() {}
+}

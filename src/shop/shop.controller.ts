@@ -1,5 +1,4 @@
-import { Body, Controller, Delete, Get, Param, Post } from '@nestjs/common';
-import { Discount } from 'src/database/entity/Discount.entity';
+import { Body, Controller, Get, Param, Post, Render } from '@nestjs/common';
 import { Product } from 'src/database/entity/Product.entity';
 import { Shop } from 'src/database/entity/Shop.entity';
 import ProductRepository from 'src/database/repository/ProductRepository';
@@ -16,8 +15,10 @@ export class ShopController {
   }
 
   @Get('/shops/:id')
+  @Render('ManageShop')
   getShopById(@Param('id') shopId: number) {
-    return this.service.getShopById(shopId);
+    const shop = this.service.getShopById(shopId);
+    return shop;
   }
 
   @Post('/shops')
@@ -28,37 +29,5 @@ export class ShopController {
   @Post('shops/delete/:id')
   deleteShop(@Param('id') shopId: number) {
     this.service.deleteShop(shopId);
-  }
-
-  @Post('/product')
-  async addProduct(
-    @Body()
-    data: {
-      shopId: number;
-      name: String;
-      description?: String;
-      image?: String;
-      category: String;
-      discountPercent?: number;
-      discountStartDate?: Date;
-      discountEndDate?: Date;
-    },
-  ) {
-    const discountRep = getRepository(Discount);
-    const discount = await discountRep.findOne({ id: 1 });
-
-    const product = new Product();
-    product.name = data.name;
-    product.description = data.description;
-    product.image = data.image;
-    product.discount = discount;
-    product.category = data.category;
-
-    const productRep = getCustomRepository(ProductRepository);
-    const shopRep = getRepository(Shop);
-
-    product.shop = await shopRep.findOne({ id: 1 });
-    console.log(product);
-    //productRep.addProduct(product);
   }
 }

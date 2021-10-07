@@ -24,10 +24,15 @@
       "static/chunks/main.js",
       "static/chunks/pages/_error.js"
     ],
-    "/views/Profile": [
+    "/views/ManageShop": [
       "static/chunks/webpack.js",
       "static/chunks/main.js",
-      "static/chunks/pages/views/Profile.js"
+      "static/chunks/pages/views/ManageShop.js"
+    ],
+    "/views/ProductDetail": [
+      "static/chunks/webpack.js",
+      "static/chunks/main.js",
+      "static/chunks/pages/views/ProductDetail.js"
     ]
   },
   "ampFirstPages": []
