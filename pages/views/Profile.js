@@ -28,15 +28,10 @@ export default class Profile extends React.Component{
                                     <img src="https://bootdey.com/img/Content/avatar/avatar6.png" alt="Admin" class="rounded-circle p-1 bg-primary" width="110"/>
                                     <div class="mt-3">
                                         <h4>{this.props.firstname + "  "}{this.props.lastname}</h4>
-                                        <p class="text-secondary mb-1">Full Stack Developer</p>
                                         <p class="text-muted font-size-sm">Bay Area, San Francisco, CA</p>
-                                        <button class="btn btn-primary">Follow</button>
-                                        <button class="btn btn-outline-primary">Message</button>
-                                        <button class="btn btn-outline-primary">Upload Photo + About</button>
+                                        <button class="btn btn-outline-primary">Upload Photo</button>
                                     </div>
                                 </div>
-                                <hr class="my-4"/>
-                                //put here the fck
                             </div>
                         </div>
                     </div>
@@ -44,14 +39,6 @@ export default class Profile extends React.Component{
                         <div class="card">
                             <div class="card-body">
 
-                            <div class="row mb-3">
-                                    <div class="col-sm-3">
-                                        <h6 class="mb-0">User ID</h6>
-                                    </div>
-                                    <div class="col-sm-9 text-secondary">
-                                    <input type="text" class="form-control" value={this.props.userId} readonly />
-                                    </div>
-                                </div>
 
 
                                 <div class="row mb-3">
@@ -94,8 +81,9 @@ export default class Profile extends React.Component{
                                 <div class="row">
                                     <div class="col-sm-3"></div>
                                     <div class="col-sm-9 text-secondary">
-                                        <input type="button" class="btn btn-primary px-4" value="Save Changes" readonly />
-                                    </div>
+                                        <form action="http://localhost:3000/logout" method="POST">
+                                            <input type="submit" value="logout" class="btn btn-outline-primary"/>
+                                        </form>                                    </div>
                                 </div>
                             </div>
                         </div>

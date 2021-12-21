@@ -1,6 +1,7 @@
 import React from 'react';
 import '../register.module.css'
 import Head from 'next/head'
+import Nav from './Nav'
 
 export default class Register extends React.Component{
 
@@ -19,32 +20,19 @@ export default class Register extends React.Component{
 
             </Head>
                 <header class="header">
-    <nav class="navbar navbar-expand-lg navbar-light py-3">
-        <div class="container">
-            
-            <a href="#" class="navbar-brand">
-                <img src="https://bootstrapious.com/i/snippets/sn-registeration/logo.svg" alt="logo" width="150"/>
-            </a>
-        </div>
-    </nav>
-</header>
+                    <Nav/>
+                </header>
 
 
 <div class="container">
-    <div class="row py-5 mt-4 align-items-center">
-        
-        <div class="col-md-5 pr-lg-5 mb-5 mb-md-0">
-            <img src="https://bootstrapious.com/i/snippets/sn-registeration/illustration.svg" alt="" class="img-fluid mb-3 d-none d-md-block"/>
-            <h1>Create an Account</h1>
-            <p class="font-italic text-muted mb-0">Create a minimal registeration page using Bootstrap 4 HTML form elements.</p>
-            <p class="font-italic text-muted">Snippet By <a href="https://bootstrapious.com" class="text-muted">
-                <u>Bootstrapious</u></a>
-            </p>
+    <div class="row align-items-center" style={{position:'relative', bottom:50}}>
+        <div class="col-md-5">
+            <img src="https://co-well.vn/wp-content/uploads/2019/12/why-ecommerce-is-important-with-business.png" alt="" style={{width:600, position:'relative', right:100, height:500}}/>
         </div>
-
-
         <div class="col-md-7 col-lg-6 ml-auto">
             <form action="http://localhost:3000/register" method="POST">
+            <h1 class="text-center text-primary mb-5">Register Now</h1>
+            <p class="font-italic text-muted text-center mb-3">Advertise Your Shops, Products and Auctions!!</p>
                 <div class="row">
                     <div class="input-group col-lg-6 mb-4">
                         <div class="input-group-prepend">
@@ -137,9 +125,6 @@ export default class Register extends React.Component{
         </div>
     </div>
 </div>
-
-
-
             </>
         )
     }

@@ -16,8 +16,9 @@ export class ShopController {
 
   @Get('/shops/:id')
   @Render('ManageShop')
-  getShopById(@Param('id') shopId: number) {
-    const shop = this.service.getShopById(shopId);
+  async getShopById(@Param('id') shopId: number) {
+    const shop = await this.service.getShopById(shopId);
+    console.log(shop);
     return shop;
   }
 

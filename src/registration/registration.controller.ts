@@ -59,13 +59,12 @@ export class RegistrationController {
   SignIn(): void {}
 
   @Post('/register')
-  //@Redirect
+  @Redirect('signIn')
   @FormDataRequest()
   register(
     @Body()
     data: any,
   ) {
-    console.log(data);
     this.userService.addUser(data);
   }
 

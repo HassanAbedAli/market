@@ -1,3 +1,5 @@
+import { BidModule } from './bid/bid.module';
+import { BidController } from './bid/bid.controller';
 import { DatabaseModule } from './database/database.module';
 import { ProductsController } from './product/products.controller';
 import { RepositoryModule } from './database/repository/repository.module';
@@ -15,12 +17,14 @@ import { ProductModule } from './product/product.module';
 
 @Module({
   imports: [
+    BidModule,
     DatabaseModule,
     ShopModule,
     RepositoryModule,
     AuthModule,
     RegistrationModule,
     ProductModule,
+    BidModule,
     UsersModule,
     NestjsFormDataModule,
     RenderModule.forRootAsync(
@@ -28,6 +32,6 @@ import { ProductModule } from './product/product.module';
     ),
     TypeOrmModule.forRoot(),
   ],
-  controllers: [ProductsController, RegistrationController],
+  controllers: [BidController, ProductsController, RegistrationController],
 })
 export class AppModule {}

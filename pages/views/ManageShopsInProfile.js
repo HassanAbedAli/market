@@ -21,9 +21,11 @@ export default class ManageShopsInProfile extends React.Component{
                 <td>{shop.phoneNumber}</td>
                 <td>
                 <a href="#editEmployeeModal" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
+				</td>
+				<td>
                 <a href="#deleteShopModal" onClick={()=> this.setState({toDeleteShop:shop.id})} class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
                 </td>
-                <td><a href={"http://localhost:3000/shops/"+shop.id}> Go to the Shop Page </a> </td>
+                <td><a href={"http://localhost:3000/shops/"+shop.id}> <span class="material-icons">visibility</span> </a> </td>
             </tr>
             )
 
@@ -45,14 +47,14 @@ export default class ManageShopsInProfile extends React.Component{
 
 
         <div class="container-xl">
-	<div class="table-responsive">
+	<div class="table-responsive text-center">
 		<div class="table-wrapper">
 			<div class="table-title">
 				<div class="row">
-					<div class="col-sm-6">
-						<h2>Manage Your <b> Shops</b></h2>
+					<div class="col-sm-6 mb-3">
+						<h2 class="text-left text-primary">Manage Your <b> Shops</b></h2>
 					</div>
-					<div class="col-sm-6">
+					<div class="col-sm-6 text-right">
 						<a href="#createShopModal" class="btn btn-success" data-toggle="modal"><i class="material-icons">&#xE147;</i> <span>Create New Shop</span></a>
 					</div>
 				</div>
@@ -63,7 +65,10 @@ export default class ManageShopsInProfile extends React.Component{
 						<th>Name</th>
 						<th>Address</th>
 						<th>Phone</th>
-						<th>Actions</th>
+						<th>Edit</th>
+						<th>Delete</th>
+						<th>View</th>
+
 					</tr>
 				</thead>
 				<tbody>

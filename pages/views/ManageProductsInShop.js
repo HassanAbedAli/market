@@ -7,36 +7,61 @@ export default class ManageProductsInShop extends React.Component{
   constructor(props){
       super(props);
       this.state = {
-          toDeleteProduct:0
+          toDeleteProduct:0,
+		  toEditProduct:{}
       };
+
+	//   this.handleNameChange=this.handleNameChange.bind(this);
+	//   this.handleDescriptionChange=this.handleDescriptionChange.bind(this);
+	//   this.handlePriceChange=this.handlePriceChange.bind(this);
+
   }
+
+//   	handleNameChange(event){
+// 	this.setState({toEditProduct:{name:event.target.value}});
+//   }
+// 	handleDescriptionChange(event){
+// 	this.setState({toEditProduct:{description:event.target.value}});
+//   }
+// 	handlePriceChange(event){
+// 	this.setState({toEditProduct:{price:event.target.value}});
+//   }
 
   render(){
 	
     const products = this.props.products;
-	console.log(products)
-    const rows = products.map(product =>
-        <tr>
-                <td>{product.name}</td>
-                <td>{product.category}</td>
-                <td>{product.price}</td>
-				<td>{product.percentage==null? "No Discount":
-				
-				<div>{product.percentage}
-				<p>{new Date(product.dateStart.toString()).toDateString()}</p>
-				<p>{new Date(product.dateEnd.toString()).toDateString()}</p>
-				</div>
-				}
-				</td>
+    let rows;
+	if(products){
+		rows = products.map(product =>
+			<tr>
+					<td>{product.name}</td>
+					<td>{product.category}</td>
+					<td>{product.price}</td>
+	
+					{ <td>{product.percentage==null? "No Discount":
+					
+					<div>{product.percentage}
+					</div>
+					}
 
-
-                <td>
-                <a href="#editEmployeeModal" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
-                <a href="#deleteProductModal" onClick={()=> this.setState({toDeleteProduct:product.id})} class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
-                </td>
-                <td><a href={"http://localhost:3000/products/"+product.id}> Go to the Product Detail Page </a> </td>
-            </tr>
-            )
+					{/* <p>{new Date(product.dateStart.toString()).toDateString()}</p>
+					<p>{new Date(product.dateEnd.toString()).toDateString()}</p> */}
+					
+					</td>}
+	
+					
+					<td>
+						<a href="#editProductModal" onClick={()=> this.setState({toEditProduct:product})} class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
+					</td>
+					<td>
+						<a href="#deleteProductModal" onClick={()=> this.setState({toDeleteProduct:product.id})} class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
+					</td>
+					<td>
+						<a href={"http://localhost:3000/products/"+product.id}> <span class="material-icons">visibility</span></a> 
+					</td>
+				</tr>
+				)
+	}
 
     return(
       <>
@@ -53,19 +78,16 @@ export default class ManageProductsInShop extends React.Component{
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
 
         </Head>
-
-
-			<br/><br/><br/><br></br>
         <div class="container-xl">
 	<div class="table-responsive">
-		<div class="table-wrapper">
+		<div class="table-wrapper mt-3 text-center" >
 			<div class="table-title">
 				<div class="row">
-					<div class="col-sm-6">
-						<h2>Manage Your <b> Products</b></h2>
+					<div class="col-sm-6 mb-3">
+						<h2 class="text-primary text-left">Manage Your <b> Products</b></h2>
 					</div>
-					<div class="col-sm-6">
-						<a href="#addProductModal" class="btn btn-success" data-toggle="modal"><i class="material-icons">&#xE147;</i> <span>Add a New Product</span></a>
+					<div class="col-sm-6 text-right">
+						<a href="#addProductModal" class="btn btn-success" data-toggle="modal"><i class="material-icons">&#xE147;</i> <span style={{position:'relative', bottom:5}}>Add a New Product</span></a>
 					</div>
 				</div>
 			</div>
@@ -76,7 +98,9 @@ export default class ManageProductsInShop extends React.Component{
 						<th>Category</th>
 						<th>Price</th>
 						<th> Discount Percentage </th>
-						<th>Actions</th>
+						<th> Edit</th>
+						<th> Delete</th>
+						<th> Preview</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -105,15 +129,10 @@ export default class ManageProductsInShop extends React.Component{
 						<label>Description</label>
 						<textarea class="form-control" name="description" required></textarea>
 					</div>
-
-
 					<input type="hidden" name="shopId" value={this.props.shopId}/>
-
-
                     <div class="form-group">
 						<label for="category">Category</label>
 							<select class="custom-select tm-select-accounts" name="category" id="category">
-							<option selected="">Select category</option>
 							<option value="Clothes">Clothes</option>
 							<option value="Food">Food</option>
 							<option value="Electronics">Electronics</option>
@@ -127,23 +146,16 @@ export default class ManageProductsInShop extends React.Component{
 						<input type="number" class="form-control" name="price" required/>
 					</div>
 					<div class="form-group">
-						<label>Image URL : </label>
+						<label>Image : </label>
 						<input type="text" class="form-control" name="image" required/>
 					</div>
 					<div class="form-group">
 						<label>Discount ( Optional )</label>
-						<input type="number" class="form-control" name="percentage" required/>
+						<input type="number" class="form-control" name="percentage"/>
 					<br/>
 
 					<div class="row">
-						<div class="col-6 ">
-							<label for="discountDateStart"  >Discount Date Start</label>
-                    		<input id="discountDateStart" name="discountDateStart" type="date" class="form-control validate"/>
-						</div>
-						<div class="col-6">
-						<label for="discountDateEnd" >Discount Date End</label>
-                    	<input id="discountDateEnd" name="discountDateEnd" type="date" class="form-control validate"/>
-						</div>
+						
 					</div>
 					</div>
 				</div>
@@ -156,42 +168,58 @@ export default class ManageProductsInShop extends React.Component{
 	</div>
 </div>
 
-<div id="editEmployeeModal" class="modal fade">
+
+
+<div id="editProductModal" class="modal fade">
 	<div class="modal-dialog">
 		<div class="modal-content">
-			<form>
+			<form action={`http://localhost:3000/products/edit/10`} method="POST">
 				<div class="modal-header">						
-					<h4 class="modal-title">Edit Employee</h4>
+					<h4 class="modal-title">Edit Product</h4>
 					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 				</div>
 				<div class="modal-body">					
 					<div class="form-group">
 						<label>Name</label>
-						<input type="text" class="form-control" required/>
+						{/* <input type="text" name="name" class="form-control" onChange={this.handleNameChange()} value ={this.state.toEditProduct.name} required/> */}
+					</div>
+					<div class="form-group">
+						<label>Phone</label>
+						{/* <textarea class="form-control" name="description" onChange={this.handleDescriptionChange()} >{this.state.toEditProduct.description}</textarea> */}
 					</div>
 
                     <div class="form-group">
 						<label>Category</label>
-						<textarea class="form-control" required></textarea>
+						<select class="custom-select tm-select-accounts" name="category" id="category">
+						<option value="Clothes"> Clothes</option>
+						<option value="Food">Food</option>
+						<option value="Electronics">Electronics</option>
+						<option value="Homes">Homes</option>
+						<option value="Services">Services</option>
+						<option value="Other">Other</option>
+						</select>
 					</div>
 
 					<div class="form-group">
 						<label>Price</label>
-						<input type="email" class="form-control" required/>
+						{/* <input type="number" name="price" onChange={this.handlePriceChange()} value ={this.state.toEditProduct.price} class="form-control" required/> */}
 					</div>
-					<div class="form-group">
-						<label>Phone</label>
-						<input type="text" class="form-control" required/>
-					</div>					
+										
 				</div>
 				<div class="modal-footer">
 					<input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel"/>
 					<input type="submit" class="btn btn-info" value="Save"/>
 				</div>
+				<input type="hidden" name="shopId" value={this.props.shopId} readOnly />
 			</form>
 		</div>
 	</div>
 </div>
+
+
+
+
+
 
 <div id="deleteProductModal" class="modal fade">
 	<div class="modal-dialog">
@@ -208,17 +236,12 @@ export default class ManageProductsInShop extends React.Component{
 				<div class="modal-footer">
 					<input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel"/>
 					<input type="submit" class="btn btn-danger" value="Delete"/>
+					<input type="hidden" name="shopId" value={this.props.shopId} readOnly />
 				</div>
 			</form>
 		</div>
 	</div>
 </div>
-
-
-
-
-
-
 
 
 

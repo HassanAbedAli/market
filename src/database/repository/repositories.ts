@@ -1,10 +1,6 @@
-import {
-  getConnection,
-  getCustomRepository,
-  getRepository,
-  Repository,
-} from 'typeorm';
+import { getCustomRepository, getRepository, Repository } from 'typeorm';
 import { Auction } from '../entity/Auction.entity';
+import { Bid } from '../entity/Bid.entity';
 import { Product } from '../entity/Product.entity';
 import { Shop } from '../entity/Shop.entity';
 import User from '../entity/User.entity';
@@ -29,5 +25,9 @@ export default class repositoriesStore {
 
   static getAuctionRepository(): Repository<Auction> {
     return getRepository(Auction);
+  }
+
+  static getBidRepository(): Repository<Bid> {
+    return getRepository(Bid);
   }
 }

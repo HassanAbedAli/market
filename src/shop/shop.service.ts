@@ -8,8 +8,6 @@ import { Shop } from '../database/entity/Shop.entity';
 
 @Injectable()
 export class ShopService {
-  //static readonly shopRepositry = getRepository(Shop)
-
   constructor() {}
 
   async createShop(data: any) {
@@ -29,9 +27,9 @@ export class ShopService {
   }
 
   async getShopById(shopId: number): Promise<Shop> {
-    return repositoriesStore
-      .getShopRepository()
-      .findOne(shopId, { relations: ['products', 'auctions'] });
+    return await repositoriesStore.getShopRepository().findOne(shopId, {
+      relations: ['products', 'auctions', 'auctions.bids'],
+    });
   }
 
   async getAllShops(): Promise<Shop[]> {
